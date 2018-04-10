@@ -4,6 +4,7 @@ Make an application that allows the user to view the observed (in the past 30 da
 You are free to use the tools and frameworks you prefer unless stated otherwise.
 
 **Requirements**
+* Use React Native
 
 **Timing**
 
