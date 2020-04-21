@@ -1,7 +1,7 @@
 # Technical assignment mobile engineer
-Make an application that allows the user to view the observed (in the past 30 days) or forecasted (in the future) daily weather conditions for a given location using the [Dark Sky API](https://darksky.net/dev/docs).
+Make an application that allows the user to view the observed (in the past 30 days) or forecasted (in the future) daily weather conditions for a given location using your preferred weather API.
 
-You are free to use the tools and frameworks you prefer, however we strongly suggest you keep the hard skills of the job offer in mind.
+You are free to use the frameworks and tools you prefer, however we strongly suggest you keep the hard skills of the job offer in mind.
 
 **Minimal requirements**
 * Use React Native
