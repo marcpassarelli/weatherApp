@@ -19,6 +19,7 @@
 		54D27E02438583C1E106611C /* libPods-weatherApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 423520837D38099E47176E4E /* libPods-weatherApp-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A4A853FEE12C81F28FEE4690 /* libPods-weatherApp-weatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0389F0A49DA0F4713F39B0B2 /* libPods-weatherApp-weatherAppTests.a */; };
+		BB5791BB258EEAC7007E392D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB5791BA258EEAC7007E392D /* MaterialCommunityIcons.ttf */; };
 		F4C3E9C8D6F515A0EA2B0F2A /* libPods-weatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39080D22B67308E010BECED1 /* libPods-weatherApp.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		8AE38AB6BC315DB7A5274CA7 /* Pods-weatherApp-weatherAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherApp-weatherAppTests.debug.xcconfig"; path = "Target Support Files/Pods-weatherApp-weatherAppTests/Pods-weatherApp-weatherAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F88ED65218FCBB86720E767 /* libPods-weatherApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-weatherApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B617031EA1B4A59E8093FA8C /* Pods-weatherApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-weatherApp-tvOS/Pods-weatherApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		BB5791BA258EEAC7007E392D /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EFF063700AE8E69EFCBB9074 /* Pods-weatherApp-weatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherApp-weatherAppTests.release.xcconfig"; path = "Target Support Files/Pods-weatherApp-weatherAppTests/Pods-weatherApp-weatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		13B07FAE1A68108700A75B9A /* weatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				BB5791B1258EEA54007E392D /* Fonts */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -182,6 +185,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BB5791B1258EEA54007E392D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BB5791BA258EEAC7007E392D /* MaterialCommunityIcons.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		E7003F0E21504DB4418FB11A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +205,6 @@
 				8AE38AB6BC315DB7A5274CA7 /* Pods-weatherApp-weatherAppTests.debug.xcconfig */,
 				EFF063700AE8E69EFCBB9074 /* Pods-weatherApp-weatherAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -341,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				BB5791BB258EEAC7007E392D /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
