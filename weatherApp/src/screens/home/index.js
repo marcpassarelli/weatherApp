@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { SafeAreaView, Text } from 'react-native'
+
 import LocationTextInput from './LocationTextInput'
+import Summary from './Summary'
+import NextHoursForecast from './NextHoursForecast'
 
 import styles from './styles'
-import Summary from './Summary'
 
 const Home = () => {
   const [isThereALocation, setIsThereALocation] = useState(true)
@@ -14,6 +16,7 @@ const Home = () => {
         <>
           <Text style={styles.cityName}>Altamira - Brazil</Text>
           <Summary />
+          <NextHoursForecast />
         </>
       ) : (
         <Text style={styles.textInsertLocation}>
