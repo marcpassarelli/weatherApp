@@ -178,11 +178,10 @@ const hourly = [
 
 const NextHoursForecast = () => {
   return (
-    <View style={{ width: '80%', height: '100%' }}>
+    <View style={styles.container}>
       <ScrollView
         horizontal={true}
-        contentContainerStyle={styles.container}
-        style={{ flex: 1 }}
+        contentContainerStyle={styles.containerScrollView}
       >
         {hourly.map((hour) => {
           return (

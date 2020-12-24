@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     width: '80%',
-    flexDirection: 'row',
     shadowColor: 'rgba(43, 189, 204, .4)',
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 1,
@@ -13,27 +12,36 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderRadius: 8,
     width: '80%',
-  },
-  containerScrollView: {
     padding: 10,
-    height: '100%',
   },
-  cardHour: {
-    justifyContent: 'center',
+  cardDay: {
+    width: '100%',
+    height: 40,
+    flexDirection: 'row',
     alignItems: 'center',
-    width: 100,
+    justifyContent: 'space-evenly',
   },
-  textHour: {
+  textDayMonth: {
     fontSize: 16,
   },
   textTemperature: {
-    fontSize: 20,
+    fontSize: 16,
     marginBottom: 5,
   },
   textPrecipitation: {
     marginLeft: 5,
   },
+  containerDay: {
+    width: '25%',
+  },
+  containerIcon: {
+    width: '25%',
+  },
+  containerTemperature: {
+    width: '25%',
+  },
   containerPrecipitation: {
+    width: '25%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
