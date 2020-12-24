@@ -4,6 +4,7 @@ import { SafeAreaView, Text } from 'react-native'
 import LocationTextInput from './LocationTextInput'
 import Summary from './Summary'
 import NextHoursForecast from './NextHoursForecast'
+import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'
 
@@ -17,6 +18,7 @@ const Home = () => {
           <Text style={styles.cityName}>Altamira - Brazil</Text>
           <Summary />
           <NextHoursForecast />
+          <SevenDaysForecast />
         </>
       ) : (
         <Text style={styles.textInsertLocation}>
