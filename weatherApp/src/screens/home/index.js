@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Pressable, SafeAreaView, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -8,18 +8,28 @@ import NextHoursForecast from './NextHoursForecast'
 import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'
+import useGetCurrentPosition from '../../hooks/useGetCurrentPosition'
 
 const Home = () => {
   const [isThereALocation, setIsThereALocation] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [currentLocation, loadingLocation] = useGetCurrentPosition()
   const { navigate } = useNavigation()
+
+  useEffect(() => {
+    if (!loadingLocation) {
+      console.log('currentLocation', currentLocation)
+    }
+  }, [loadingLocation])
 
   const goToHistory = () => {
     navigate('History')
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <LocationTextInput />
-      {isThereALocation ? (
+      {!loadingLocation ? (
         <>
           <Text style={styles.cityName}>Altamira - Brazil</Text>
           <Summary />
