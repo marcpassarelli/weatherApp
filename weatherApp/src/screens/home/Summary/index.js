@@ -8,7 +8,7 @@ const Summary = () => (
   <View style={styles.container}>
     <View style={styles.leftInfo}>
       <Text style={styles.textCurrentTemperature}>38º</Text>
-      <Icon name='weather-sunny' color='#472c82' size={50} />
+      <Icon name='weather-sunny' color='#ffcc00' size={50} />
     </View>
     <View style={styles.rightInfo}>
       <Text style={styles.textRightInfo}>27º / 38º</Text>

@@ -18,35 +18,35 @@ const hourly = [
     temperature: 34,
     description: 'Clear',
     pop: 0.15,
-    icon: '01d',
+    icon: '02d',
   },
   {
     hour: '19:00',
     temperature: 33,
     description: 'Clear',
     pop: 0.2,
-    icon: '01d',
+    icon: '03d',
   },
   {
     hour: '20:00',
     temperature: 32,
     description: 'Clear',
     pop: 0.25,
-    icon: '01d',
+    icon: '04d',
   },
   {
     hour: '21:00',
     temperature: 31,
     description: 'Clouds',
     pop: 0.3,
-    icon: '01d',
+    icon: '04n',
   },
   {
     hour: '22:00',
     temperature: 30,
     description: 'Clouds',
     pop: 0.35,
-    icon: '01d',
+    icon: '03n',
   },
   {
     hour: '23:00',
@@ -190,7 +190,7 @@ const NextHoursForecast = () => {
               <Image
                 style={{ height: 60, width: 60 }}
                 source={{
-                  uri: `http://openweathermap.org/img/w/${hour.icon}.png`,
+                  uri: `http://openweathermap.org/img/wn/${hour.icon}.png`,
                 }}
               />
               <Text style={styles.textTemperature}>{hour.temperature}º</Text>
