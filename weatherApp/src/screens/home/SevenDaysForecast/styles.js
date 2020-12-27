@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
-  textDayMonth: {
+  textDayWeek: {
     fontSize: 16,
   },
   textTemperature: {
