@@ -8,12 +8,12 @@ import NextHoursForecast from './NextHoursForecast'
 import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'
-import useGetCurrentPosition from '../../hooks/useGetCurrentPosition'
+import useGetPosition from '../../hooks/useGetPosition'
 
 const Home = () => {
   const [isThereALocation, setIsThereALocation] = useState(true)
   const [loading, setLoading] = useState(false)
-  const [currentLocation, loadingLocation] = useGetCurrentPosition()
+  const [currentLocation, loadingLocation] = useGetPosition()
   const { navigate } = useNavigation()
 
   useEffect(() => {
