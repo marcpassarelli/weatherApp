@@ -105,37 +105,37 @@ const useGetPosition = () => {
     localStorageLocation =
       localStorageLocation != null ? JSON.parse(localStorageLocation) : {}
 
-    if (Object.keys(localStorageLocation).length) {
-      setCurrentLocation(localStorageLocation)
-      setLoading(false)
-    } else {
-      await Geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentLocation(position)
-          setLoading(false)
+    // if (Object.keys(localStorageLocation).length) {
+    //   setCurrentLocation(localStorageLocation)
+    //   setLoading(false)
+    // } else {
+    await Geolocation.getCurrentPosition(
+      (position) => {
+        setCurrentLocation(position)
+        setLoading(false)
+      },
+      (error) => {
+        Alert.alert(`Code ${error.code}`, error.message)
+        setLoading(false)
+      },
+      {
+        accuracy: {
+          android: 'high',
+          ios: 'best',
         },
-        (error) => {
-          Alert.alert(`Code ${error.code}`, error.message)
-          setLoading(false)
-        },
-        {
-          accuracy: {
-            android: 'high',
-            ios: 'best',
-          },
-          timeout: 15000,
-          maximumAge: 10000,
-          distanceFilter: 0,
-        }
-      )
-
-      try {
-        const jsonValue = JSON.stringify(currentLocation)
-        await AsyncStorage.setItem('@location', jsonValue)
-      } catch (error) {
-        console.log('error async', error)
+        timeout: 15000,
+        maximumAge: 10000,
+        distanceFilter: 0,
       }
-    }
+    )
+
+    // try {
+    //   const jsonValue = JSON.stringify(currentLocation)
+    //   await AsyncStorage.setItem('@location', jsonValue)
+    // } catch (error) {
+    //   console.log('error async', error)
+    // }
+    // }
   }
 
   return [currentLocation, loading]
