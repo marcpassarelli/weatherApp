@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rightInfo: {
-    flexDirection: 'column',
+    alignItems: 'center',
   },
   textCurrentTemperature: {
     fontSize: 24,
