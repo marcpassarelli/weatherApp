@@ -13,23 +13,41 @@ import useGetPosition from '../../hooks/useGetPosition'
 import { API_KEY } from '@env'
 
 const Home = () => {
-  const [isThereALocation, setIsThereALocation] = useState(true)
   const [weatherInfoSummary, setWeatherInfoSummary] = useState({})
+  const [weatherInfoForecast, setWeatherInfoForecast] = useState({})
   const [loading, setLoading] = useState(true)
   const [currentLocation, loadingLocation] = useGetPosition()
   const { navigate } = useNavigation()
 
   useEffect(() => {
     if (!loadingLocation) {
+      let promises = []
+
       //fetch info for weather summary
-      fetch(
-        `https://api.openweathermap.org/data/2.5/find?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&cnt=10&units=metric&appid=${API_KEY}`
+      promises.push(
+        fetch(
+          `https://api.openweathermap.org/data/2.5/find?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&cnt=10&units=metric&appid=${API_KEY}`
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            setWeatherInfoSummary(result.list[2])
+          })
       )
-        .then((res) => res.json())
-        .then((result) => {
-          setWeatherInfoSummary(result.list[0])
-          setLoading(false)
-        })
+
+      //fetch info for forecast
+      promises.push(
+        fetch(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&exclude=current,minutely,alerts&units=metric&appid=${API_KEY}`
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            setWeatherInfoForecast(result)
+          })
+      )
+
+      Promise.all(promises).then(() => {
+        setLoading(false)
+      })
     }
   }, [loadingLocation])
 
@@ -46,7 +64,9 @@ const Home = () => {
             {weatherInfoSummary.name} - {weatherInfoSummary.sys.country}
           </Text>
           <Summary weatherInfo={weatherInfoSummary} />
-          <NextHoursForecast />
+          <NextHoursForecast
+            weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
+          />
           <SevenDaysForecast />
           <Pressable onPress={goToHistory} style={styles.buttonHistory}>
             <Text style={styles.textButtonHistory}>
