@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   containerDay: {
-    width: '25%',
+    width: '30%',
   },
   containerIcon: {
     width: '25%',
   },
   containerTemperature: {
-    width: '25%',
+    width: '20%',
   },
   containerPrecipitation: {
     width: '25%',

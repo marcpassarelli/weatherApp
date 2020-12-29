@@ -23,7 +23,7 @@ const Summary = ({ weatherInfo }) => {
           {Math.round(weatherInfo.main.temp_min)}º
         </Text>
         <Text style={styles.textRightInfo}>
-          Feels like: {Math.round(weatherInfo.main.feels_like)}º
+          feels like: {Math.round(weatherInfo.main.feels_like)}º
         </Text>
         <Text style={styles.textRightInfo}>
           {weatherInfo.weather[0].description}
