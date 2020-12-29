@@ -30,7 +30,7 @@ const Home = () => {
         )
           .then((res) => res.json())
           .then((result) => {
-            setWeatherInfoSummary(result.list[2])
+            setWeatherInfoSummary(result.list[0])
           })
       )
 
@@ -67,7 +67,9 @@ const Home = () => {
           <NextHoursForecast
             weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
           />
-          <SevenDaysForecast />
+          <SevenDaysForecast
+            weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
+          />
           <Pressable onPress={goToHistory} style={styles.buttonHistory}>
             <Text style={styles.textButtonHistory}>
               See history (Last 30 Days)
