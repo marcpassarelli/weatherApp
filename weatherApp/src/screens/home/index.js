@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Pressable, SafeAreaView, Text } from 'react-native'
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import LocationTextInput from './LocationTextInput'
@@ -11,10 +11,12 @@ import styles from './styles'
 import useGetPosition from '../../hooks/useGetPosition'
 
 import { API_KEY } from '@env'
+import SearchList from './SearchList'
 
 const Home = () => {
   const [weatherInfoSummary, setWeatherInfoSummary] = useState({})
   const [weatherInfoForecast, setWeatherInfoForecast] = useState({})
+  const [searchResult, setSearchResult] = useState()
   const [loading, setLoading] = useState(true)
   const [currentLocation, loadingLocation] = useGetPosition()
   const { navigate } = useNavigation()
@@ -55,9 +57,24 @@ const Home = () => {
     navigate('History')
   }
 
+  const handleOnChangeTextInput = async (text) => {
+    if (text.length > 2) {
+      await fetch(
+        `https://api.openweathermap.org/data/2.5/find?q=${text.trim()}&type=like&sort=population&cnt=30&units=metric&appid=${API_KEY}`
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setSearchResult(result)
+        })
+    } else if (text.length === 0) {
+      setSearchResult()
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <LocationTextInput />
+      <LocationTextInput handleOnChangeText={handleOnChangeTextInput} />
+      {searchResult && <SearchList searchResult={searchResult} />}
       {!loading ? (
         <>
           <Text style={styles.cityName}>
@@ -70,16 +87,14 @@ const Home = () => {
           <SevenDaysForecast
             weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
           />
-          <Pressable onPress={goToHistory} style={styles.buttonHistory}>
+          <TouchableOpacity onPress={goToHistory} style={styles.buttonHistory}>
             <Text style={styles.textButtonHistory}>
               See history (Last 30 Days)
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </>
       ) : (
-        <Text style={styles.textInsertLocation}>
-          Search for a location to see its forecast
-        </Text>
+        <Text style={styles.textInsertLocation}>Loading information...</Text>
       )}
     </SafeAreaView>
   )

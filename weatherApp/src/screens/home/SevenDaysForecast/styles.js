@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     width: '30%',
   },
   containerIcon: {
-    width: '25%',
+    width: '20%',
   },
   containerTemperature: {
-    width: '20%',
+    width: '25%',
   },
   containerPrecipitation: {
     width: '25%',
