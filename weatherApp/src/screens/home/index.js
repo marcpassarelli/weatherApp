@@ -16,7 +16,7 @@ import SearchList from './SearchList'
 const Home = () => {
   const [weatherInfoSummary, setWeatherInfoSummary] = useState({})
   const [weatherInfoForecast, setWeatherInfoForecast] = useState({})
-  const [searchResult, setSearchResult] = useState()
+  const [searchResultList, setSearchResultList] = useState()
   const [loading, setLoading] = useState(true)
   const [currentLocation, loadingLocation] = useGetPosition()
   const { navigate } = useNavigation()
@@ -28,11 +28,11 @@ const Home = () => {
       //fetch info for weather summary
       promises.push(
         fetch(
-          `https://api.openweathermap.org/data/2.5/find?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&cnt=10&units=metric&appid=${API_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&units=metric&appid=${API_KEY}`
         )
           .then((res) => res.json())
           .then((result) => {
-            setWeatherInfoSummary(result.list[0])
+            setWeatherInfoSummary(result)
           })
       )
 
@@ -53,6 +53,37 @@ const Home = () => {
     }
   }, [loadingLocation])
 
+  const loadWeatherInfo = (lat, lon) => {
+    setSearchResultList()
+    setLoading(true)
+    let promises = []
+    //fetch info for weather summary
+    promises.push(
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setWeatherInfoSummary(result)
+        })
+    )
+
+    //fetch info for forecast
+    promises.push(
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          setWeatherInfoForecast(result)
+        })
+    )
+
+    Promise.all(promises).then(() => {
+      setLoading(false)
+    })
+  }
+
   const goToHistory = () => {
     navigate('History')
   }
@@ -64,23 +95,33 @@ const Home = () => {
       )
         .then((response) => response.json())
         .then((result) => {
-          setSearchResult(result)
+          setSearchResultList(result)
         })
     } else if (text.length === 0) {
-      setSearchResult()
+      setSearchResultList()
     }
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <LocationTextInput handleOnChangeText={handleOnChangeTextInput} />
-      {searchResult && <SearchList searchResult={searchResult} />}
+      {searchResultList && (
+        <SearchList
+          onPressCity={(lat, long) => {
+            loadWeatherInfo(lat, long)
+          }}
+          searchResultList={searchResultList}
+        />
+      )}
       {!loading ? (
         <>
           <Text style={styles.cityName}>
             {weatherInfoSummary.name} - {weatherInfoSummary.sys.country}
           </Text>
-          <Summary weatherInfo={weatherInfoSummary} />
+          <Summary
+            weatherInfoCurrent={weatherInfoSummary}
+            weatherInfoDay={weatherInfoForecast.daily[0]}
+          />
           <NextHoursForecast
             weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
           />

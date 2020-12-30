@@ -2,16 +2,17 @@ import React from 'react'
 import { Image, ScrollView, Text, TouchableOpacity } from 'react-native'
 
 import styles from './styles'
-const SearchList = ({ searchResult }) => {
+const SearchList = ({ searchResultList, onPressCity }) => {
   return (
     <ScrollView style={styles.containerScrollView}>
-      {searchResult.list.map((result, index) => {
+      {searchResultList.list.map((result, index) => {
         return (
           <TouchableOpacity
             key={index}
             style={styles.rowButton}
             onPress={() => {
               console.log('result', result)
+              onPressCity(result.coord.lat, result.coord.lon)
             }}
           >
             <Text style={styles.textCity}>
