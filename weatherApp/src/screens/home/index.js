@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import LocationTextInput from './LocationTextInput'
@@ -22,14 +22,15 @@ const Home = () => {
   const { navigate } = useNavigation()
 
   useEffect(() => {
-    if (!loadingLocation) {
-      let promises = []
+    if (!loadingLocation && Object.keys(currentLocation).length > 0) {
       loadWeatherInfo(
         currentLocation.coords.latitude,
         currentLocation.coords.longitude
       )
+    } else {
+      setLoading(false)
     }
-  }, [loadingLocation])
+  }, [loadingLocation, currentLocation])
 
   const loadWeatherInfo = (lat, lon) => {
     setSearchResultList()
@@ -92,23 +93,32 @@ const Home = () => {
         />
       )}
       {!loading ? (
-        <>
-          <Summary
-            weatherInfoCurrent={weatherInfoSummary}
-            weatherInfoDay={weatherInfoForecast.daily[0]}
-          />
-          <NextHoursForecast
-            weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
-          />
-          <SevenDaysForecast
-            weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
-          />
-          <TouchableOpacity onPress={goToHistory} style={styles.buttonHistory}>
-            <Text style={styles.textButtonHistory}>
-              See history (Last 30 Days)
-            </Text>
-          </TouchableOpacity>
-        </>
+        Object.keys(weatherInfoSummary).length > 0 ? (
+          <>
+            <Summary
+              weatherInfoCurrent={weatherInfoSummary}
+              weatherInfoDay={weatherInfoForecast.daily[0]}
+            />
+            <NextHoursForecast
+              weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
+            />
+            <SevenDaysForecast
+              weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
+            />
+            <TouchableOpacity
+              onPress={goToHistory}
+              style={styles.buttonHistory}
+            >
+              <Text style={styles.textButtonHistory}>
+                See history (Last 30 Days)
+              </Text>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <Text style={styles.textInsertLocation}>
+            Search for a location above
+          </Text>
+        )
       ) : (
         <Text style={styles.textInsertLocation}>Loading information...</Text>
       )}

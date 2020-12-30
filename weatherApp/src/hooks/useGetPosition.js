@@ -31,7 +31,7 @@ const useGetPosition = () => {
     }
 
     if (status === 'denied') {
-      Alert.alert('Location permission denied')
+      return false
     }
 
     if (status === 'disabled') {
@@ -101,21 +101,12 @@ const useGetPosition = () => {
       return
     }
 
-    let localStorageLocation = await AsyncStorage.getItem('@location')
-    localStorageLocation =
-      localStorageLocation != null ? JSON.parse(localStorageLocation) : {}
-
-    // if (Object.keys(localStorageLocation).length) {
-    //   setCurrentLocation(localStorageLocation)
-    //   setLoading(false)
-    // } else {
     await Geolocation.getCurrentPosition(
       (position) => {
         setCurrentLocation(position)
         setLoading(false)
       },
       (error) => {
-        Alert.alert(`Code ${error.code}`, error.message)
         setLoading(false)
       },
       {
@@ -128,14 +119,6 @@ const useGetPosition = () => {
         distanceFilter: 0,
       }
     )
-
-    // try {
-    //   const jsonValue = JSON.stringify(currentLocation)
-    //   await AsyncStorage.setItem('@location', jsonValue)
-    // } catch (error) {
-    //   console.log('error async', error)
-    // }
-    // }
   }
 
   return [currentLocation, loading]

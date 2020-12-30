@@ -12,9 +12,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonHistory: {
-    width: '60%',
+    width: '100%',
     marginTop: 15,
     alignItems: 'center',
+    alignSelf: 'center',
     borderWidth: 1,
     borderColor: '#2BBDCC',
     padding: 15,

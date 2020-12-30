@@ -10,9 +10,9 @@ const LocationTextInput = ({ handleOnChangeText }) => (
       style={styles.textInput}
       placeholder='Type a location...'
     />
-    <TouchableOpacity style={styles.containerIcon}>
+    <View style={styles.containerIcon}>
       <Icon name='magnify' size={45} color='#472c82' style={styles.icon} />
-    </TouchableOpacity>
+    </View>
   </View>
 )
 
