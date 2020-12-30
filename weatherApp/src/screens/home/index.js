@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import LocationTextInput from './LocationTextInput'
 import Summary from './Summary'
-import NextHoursForecast from './NextHoursForecast'
+import NextHoursForecast from '../../sharedComponents/NextHoursForecast'
 import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'
 import useGetPosition from '../../hooks/useGetPosition'
+import { getLastPosition, storeLastPosition } from '../../utils/localStorage'
 
 import { API_KEY } from '@env'
 import SearchList from './SearchList'
@@ -23,12 +23,12 @@ const Home = () => {
   const { navigate } = useNavigation()
 
   useEffect(() => {
+    console.log('api', API_KEY)
     getLastPosition()
-      .then(async ({ lat, lon }) => {
+      .then(({ lat, lon }) => {
         loadWeatherInfo(lat, lon)
       })
       .catch((error) => {
-        console.log('error', error)
         if (!loadingLocation && Object.keys(currentLocation).length > 0) {
           loadWeatherInfo(
             currentLocation.coords.latitude,
@@ -54,7 +54,6 @@ const Home = () => {
           setWeatherInfoSummary(result)
         })
     )
-
     //fetch info for forecast
     promises.push(
       fetch(
@@ -62,38 +61,16 @@ const Home = () => {
       )
         .then((res) => res.json())
         .then((result) => {
+          console.log('result', result)
           setWeatherInfoForecast(result)
         })
     )
 
     Promise.all(promises).then(() => {
+      console.log('weatherInfoForecast', weatherInfoForecast)
       storeLastPosition(lat.toString(), lon.toString())
       setLoading(false)
     })
-  }
-
-  const storeLastPosition = async (lat, lon) => {
-    try {
-      await AsyncStorage.setItem('@latitude', lat)
-      await AsyncStorage.setItem('@longitude', lon)
-    } catch (e) {
-      // saving error
-    }
-  }
-
-  const getLastPosition = async () => {
-    try {
-      const lat = await AsyncStorage.getItem('@latitude')
-      const lon = await AsyncStorage.getItem('@longitude')
-      if (lat !== null && lon !== null) {
-        return {
-          lat: lat,
-          lon: lon,
-        }
-      }
-    } catch (e) {
-      // error reading value
-    }
   }
 
   const goToHistory = () => {
@@ -148,7 +125,7 @@ const Home = () => {
                 style={styles.buttonHistory}
               >
                 <Text style={styles.textButtonHistory}>
-                  See history (Last 30 Days)
+                  See history (Last 5 Days)
                 </Text>
               </TouchableOpacity>
             </>
