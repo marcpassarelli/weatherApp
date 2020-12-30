@@ -1,13 +1,11 @@
 import React from 'react'
 import { Image, ScrollView, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { fromUnixTime, format } from 'date-fns'
+import { format } from 'date-fns'
 
 import styles from './styles'
 
-// clear, clouds, thunderstorm, rain, drizzle, snow
-
-const NextHoursForecast = ({ weatherInfo }) => {
+const NextHoursForecast = ({ weatherInfo, timezoneOffset }) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -15,10 +13,16 @@ const NextHoursForecast = ({ weatherInfo }) => {
         contentContainerStyle={styles.containerScrollView}
       >
         {weatherInfo.map((hour) => {
+          const date = new Date(hour.dt * 1000)
+          const localTime = date.getTime()
+          const localOffset = date.getTimezoneOffset() * 60000
+          const utcTime = localTime + localOffset
+          const timeInTimeZone = utcTime + 1000 * timezoneOffset
+
           return (
             <View style={styles.cardHour} key={hour.dt}>
               <Text style={styles.textHour}>
-                {format(fromUnixTime(new Date(hour.dt)), 'hh:mm aaa')}
+                {format(new Date(timeInTimeZone), 'hh:mm aaa')}
               </Text>
               <Image
                 style={{ height: 60, width: 60 }}
