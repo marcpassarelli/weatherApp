@@ -36,7 +36,11 @@ const NextHoursForecast = ({ weatherInfo, timezoneOffset }) => {
               <View style={styles.containerPrecipitation}>
                 <Icon name='weather-rainy' size={25} color='#2BBDCC' />
                 <Text style={styles.textPrecipitation}>
-                  {(hour.pop * 100).toFixed(0)}%
+                  {hour.pop ? (
+                    <Text>{(hour.pop * 100).toFixed(0)}%</Text>
+                  ) : (
+                    <Text>{hour.humidity}%</Text>
+                  )}
                 </Text>
               </View>
             </View>
