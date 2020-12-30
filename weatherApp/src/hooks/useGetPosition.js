@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 
 import Geolocation from 'react-native-geolocation-service'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const useGetPosition = () => {
   const [currentLocation, setCurrentLocation] = useState({})

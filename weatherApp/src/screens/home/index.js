@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import LocationTextInput from './LocationTextInput'
 import Summary from './Summary'
@@ -22,15 +23,22 @@ const Home = () => {
   const { navigate } = useNavigation()
 
   useEffect(() => {
-    if (!loadingLocation && Object.keys(currentLocation).length > 0) {
-      loadWeatherInfo(
-        currentLocation.coords.latitude,
-        currentLocation.coords.longitude
-      )
-    } else {
-      setLoading(false)
-    }
-  }, [loadingLocation, currentLocation])
+    getLastPosition()
+      .then(async ({ lat, lon }) => {
+        loadWeatherInfo(lat, lon)
+      })
+      .catch((error) => {
+        console.log('error', error)
+        if (!loadingLocation && Object.keys(currentLocation).length > 0) {
+          loadWeatherInfo(
+            currentLocation.coords.latitude,
+            currentLocation.coords.longitude
+          )
+        } else {
+          setLoading(false)
+        }
+      })
+  }, [loadingLocation])
 
   const loadWeatherInfo = (lat, lon) => {
     setSearchResultList()
@@ -59,8 +67,33 @@ const Home = () => {
     )
 
     Promise.all(promises).then(() => {
+      storeLastPosition(lat.toString(), lon.toString())
       setLoading(false)
     })
+  }
+
+  const storeLastPosition = async (lat, lon) => {
+    try {
+      await AsyncStorage.setItem('@latitude', lat)
+      await AsyncStorage.setItem('@longitude', lon)
+    } catch (e) {
+      // saving error
+    }
+  }
+
+  const getLastPosition = async () => {
+    try {
+      const lat = await AsyncStorage.getItem('@latitude')
+      const lon = await AsyncStorage.getItem('@longitude')
+      if (lat !== null && lon !== null) {
+        return {
+          lat: lat,
+          lon: lon,
+        }
+      }
+    } catch (e) {
+      // error reading value
+    }
   }
 
   const goToHistory = () => {
