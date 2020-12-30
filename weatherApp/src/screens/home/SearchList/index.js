@@ -4,14 +4,13 @@ import { Image, ScrollView, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 const SearchList = ({ searchResultList, onPressCity }) => {
   return (
-    <ScrollView style={styles.containerScrollView}>
+    <ScrollView nestedScrollEnabled={true} style={styles.containerScrollView}>
       {searchResultList.list.map((result, index) => {
         return (
           <TouchableOpacity
             key={index}
             style={styles.rowButton}
             onPress={() => {
-              console.log('result', result)
               onPressCity(result.coord.lat, result.coord.lon)
             }}
           >
