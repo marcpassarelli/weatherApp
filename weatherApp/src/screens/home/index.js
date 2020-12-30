@@ -82,46 +82,52 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LocationTextInput handleOnChangeText={handleOnChangeTextInput} />
-      {searchResultList && (
-        <SearchList
-          onPressCity={(lat, long) => {
-            loadWeatherInfo(lat, long)
-          }}
-          searchResultList={searchResultList}
-        />
-      )}
-      {!loading ? (
-        Object.keys(weatherInfoSummary).length > 0 ? (
-          <>
-            <Summary
-              weatherInfoCurrent={weatherInfoSummary}
-              weatherInfoDay={weatherInfoForecast.daily[0]}
-            />
-            <NextHoursForecast
-              weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
-            />
-            <SevenDaysForecast
-              weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
-            />
-            <TouchableOpacity
-              onPress={goToHistory}
-              style={styles.buttonHistory}
-            >
-              <Text style={styles.textButtonHistory}>
-                See history (Last 30 Days)
-              </Text>
-            </TouchableOpacity>
-          </>
+    <SafeAreaView>
+      <ScrollView
+        nestedScrollEnabled={true}
+        contentContainerStyle={styles.container}
+      >
+        <LocationTextInput handleOnChangeText={handleOnChangeTextInput} />
+        {searchResultList && (
+          <SearchList
+            onPressCity={(lat, long) => {
+              loadWeatherInfo(lat, long)
+            }}
+            searchResultList={searchResultList}
+          />
+        )}
+        {!loading ? (
+          Object.keys(weatherInfoSummary).length > 0 ? (
+            <>
+              <Summary
+                weatherInfoCurrent={weatherInfoSummary}
+                weatherInfoDay={weatherInfoForecast.daily[0]}
+              />
+              <NextHoursForecast
+                timezoneOffset={weatherInfoForecast.timezone_offset}
+                weatherInfo={weatherInfoForecast.hourly.slice(0, 24)}
+              />
+              <SevenDaysForecast
+                weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
+              />
+              <TouchableOpacity
+                onPress={goToHistory}
+                style={styles.buttonHistory}
+              >
+                <Text style={styles.textButtonHistory}>
+                  See history (Last 30 Days)
+                </Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <Text style={styles.textInsertLocation}>
+              Search for a location above
+            </Text>
+          )
         ) : (
-          <Text style={styles.textInsertLocation}>
-            Search for a location above
-          </Text>
-        )
-      ) : (
-        <Text style={styles.textInsertLocation}>Loading information...</Text>
-      )}
+          <Text style={styles.textInsertLocation}>Loading information...</Text>
+        )}
+      </ScrollView>
     </SafeAreaView>
   )
 }

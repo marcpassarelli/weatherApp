@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
   },
   textInsertLocation: {
@@ -12,7 +11,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   buttonHistory: {
-    width: '100%',
+    width: '80%',
     marginTop: 15,
     alignItems: 'center',
     alignSelf: 'center',

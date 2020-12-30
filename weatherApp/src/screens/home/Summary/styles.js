@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
     backgroundColor: 'rgba(71, 44, 130,.1)',
-    elevation: 3,
+    elevation: Platform.OS === 'android' ? 0 : 3,
     borderRadius: 8,
     width: '80%',
-    justifyContent: 'space-between',
-    height: 120,
+    justifyContent: 'space-evenly',
+    height: 140,
     alignItems: 'center',
     paddingVertical: 10,
     marginTop: 10,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    width: '80%',
   },
   cityName: {
     fontSize: 20,
