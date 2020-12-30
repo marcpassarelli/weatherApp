@@ -11,10 +11,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  cityName: {
-    marginVertical: 20,
-    fontSize: 20,
-  },
   buttonHistory: {
     width: '60%',
     marginTop: 15,

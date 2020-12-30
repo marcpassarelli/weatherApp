@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     shadowColor: 'rgba(43, 189, 204, .4)',
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 1,
@@ -12,14 +12,34 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: '80%',
     justifyContent: 'space-between',
-    height: 80,
+    height: 120,
     alignItems: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    marginTop: 10,
+  },
+  containerTitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  cityName: {
+    fontSize: 20,
+  },
+  imgFlag: { height: 20, width: 25, marginLeft: 10 },
+  containerWeatherInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
   },
   leftInfo: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  imgWeather: {
+    height: 70,
+    width: 70,
   },
   rightInfo: {
     alignItems: 'center',

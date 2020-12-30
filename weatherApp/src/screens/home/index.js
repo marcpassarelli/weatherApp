@@ -24,32 +24,10 @@ const Home = () => {
   useEffect(() => {
     if (!loadingLocation) {
       let promises = []
-
-      //fetch info for weather summary
-      promises.push(
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&units=metric&appid=${API_KEY}`
-        )
-          .then((res) => res.json())
-          .then((result) => {
-            setWeatherInfoSummary(result)
-          })
+      loadWeatherInfo(
+        currentLocation.coords.latitude,
+        currentLocation.coords.longitude
       )
-
-      //fetch info for forecast
-      promises.push(
-        fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${currentLocation.coords.latitude}&lon=${currentLocation.coords.longitude}&exclude=current,minutely,alerts&units=metric&appid=${API_KEY}`
-        )
-          .then((res) => res.json())
-          .then((result) => {
-            setWeatherInfoForecast(result)
-          })
-      )
-
-      Promise.all(promises).then(() => {
-        setLoading(false)
-      })
     }
   }, [loadingLocation])
 
@@ -115,9 +93,6 @@ const Home = () => {
       )}
       {!loading ? (
         <>
-          <Text style={styles.cityName}>
-            {weatherInfoSummary.name} - {weatherInfoSummary.sys.country}
-          </Text>
           <Summary
             weatherInfoCurrent={weatherInfoSummary}
             weatherInfoDay={weatherInfoForecast.daily[0]}
