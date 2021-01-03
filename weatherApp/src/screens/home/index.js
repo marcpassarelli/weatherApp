@@ -9,7 +9,10 @@ import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'
 import useGetPosition from '../../hooks/useGetPosition'
-import { getLastPosition, storeLastPosition } from '../../utils/localStorage'
+import {
+  getLastPositionFromLocalStorage,
+  storeLastPositionInLocalStorage,
+} from '../../utils/localStorage'
 
 import { API_KEY } from '@env'
 import SearchList from './SearchList'
@@ -23,12 +26,12 @@ const Home = () => {
   const { navigate } = useNavigation()
 
   useEffect(() => {
-    console.log('api', API_KEY)
-    getLastPosition()
+    getLastPositionFromLocalStorage()
       .then(({ lat, lon }) => {
         loadWeatherInfo(lat, lon)
       })
       .catch((error) => {
+        //if there is no location
         if (!loadingLocation && Object.keys(currentLocation).length > 0) {
           loadWeatherInfo(
             currentLocation.coords.latitude,
@@ -61,14 +64,12 @@ const Home = () => {
       )
         .then((res) => res.json())
         .then((result) => {
-          console.log('result', result)
           setWeatherInfoForecast(result)
         })
     )
 
     Promise.all(promises).then(() => {
-      console.log('weatherInfoForecast', weatherInfoForecast)
-      storeLastPosition(lat.toString(), lon.toString())
+      storeLastPositionInLocalStorage(lat.toString(), lon.toString())
       setLoading(false)
     })
   }

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-export const storeLastPosition = async (lat, lon) => {
+export const storeLastPositionInLocalStorage = async (lat, lon) => {
   try {
     await AsyncStorage.setItem('@latitude', lat)
     await AsyncStorage.setItem('@longitude', lon)
@@ -8,7 +8,7 @@ export const storeLastPosition = async (lat, lon) => {
   }
 }
 
-export const getLastPosition = async () => {
+export const getLastPositionFromLocalStorage = async () => {
   try {
     const lat = await AsyncStorage.getItem('@latitude')
     const lon = await AsyncStorage.getItem('@longitude')
