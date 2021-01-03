@@ -39,7 +39,9 @@ const NextHoursForecast = ({ weatherInfo, timezoneOffset }) => {
                   {hour.pop ? (
                     <Text>{(hour.pop * 100).toFixed(0)}%</Text>
                   ) : (
-                    <Text>{hour.humidity}%</Text>
+                    <Text>
+                      {hour.rain ? hour.rain['1h'] + 'mm' : 'no info'}
+                    </Text>
                   )}
                 </Text>
               </View>
