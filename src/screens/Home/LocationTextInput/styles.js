@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    width: '80%',
+    width: '90%',
   },
   textInput: {
     width: '80%',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   containerIcon: {
     height: 60,
-    width: '20%',
+    width: '18%',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,

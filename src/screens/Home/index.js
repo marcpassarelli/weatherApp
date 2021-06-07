@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import LocationTextInput from './LocationTextInput'
 import Summary from './Summary'
-import NextHoursForecast from '../../sharedComponents/NextHoursForecast'
+import NextHoursForecast from '../../components/NextHoursForecast'
 import SevenDaysForecast from './SevenDaysForecast'
 
 import styles from './styles'

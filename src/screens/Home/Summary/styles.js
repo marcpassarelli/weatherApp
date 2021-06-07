@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(71, 44, 130,.1)',
     elevation: Platform.OS === 'android' ? 0 : 3,
     borderRadius: 8,
-    width: '80%',
+    width: '90%',
     justifyContent: 'space-evenly',
     height: 140,
     alignItems: 'center',

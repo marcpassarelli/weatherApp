@@ -7,7 +7,7 @@ import {
   hasPassedSixHours,
 } from '../../utils/localStorage'
 import { API_KEY } from '@env'
-import NextHoursForecast from '../../sharedComponents/NextHoursForecast'
+import NextHoursForecast from '../../components/NextHoursForecast'
 import { format, fromUnixTime } from 'date-fns'
 import styles from './styles'
 
