@@ -1,10 +1,11 @@
-import React from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import React from "react";
+import { Image, ScrollView, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { format, fromUnixTime } from 'date-fns'
+import { format, fromUnixTime } from "date-fns";
 
-import styles from './styles'
+import styles from "./styles";
+import RainPrecipitation from "../../../components/RainPrecipitation";
 
 const SevenDaysForecast = ({ weatherInfo }) => {
   return (
@@ -15,8 +16,8 @@ const SevenDaysForecast = ({ weatherInfo }) => {
             <View style={styles.containerDay}>
               <Text style={styles.textDayWeek}>
                 {index === 0
-                  ? 'Today'
-                  : format(fromUnixTime(new Date(day.dt)), 'EEEE')}
+                  ? "Today"
+                  : format(fromUnixTime(new Date(day.dt)), "EEEE")}
               </Text>
             </View>
             <View style={styles.containerIcon}>
@@ -32,17 +33,12 @@ const SevenDaysForecast = ({ weatherInfo }) => {
                 {Math.round(day.temp.max)}º / {Math.round(day.temp.min)}º
               </Text>
             </View>
-            <View style={styles.containerPrecipitation}>
-              <Icon name='weather-rainy' size={25} color='#2BBDCC' />
-              <Text style={styles.textPrecipitation}>
-                {(day.pop * 100).toFixed(0)}%
-              </Text>
-            </View>
+            <RainPrecipitation percentage={(day.pop * 100).toFixed(0) + "%"} />
           </View>
-        )
+        );
       })}
     </View>
-  )
-}
+  );
+};
 
-export default SevenDaysForecast
+export default SevenDaysForecast;
