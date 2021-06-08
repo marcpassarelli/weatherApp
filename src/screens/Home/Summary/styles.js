@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   cityName: {
     fontSize: 20,
+    marginRight: 10,
   },
-  imgFlag: { height: 20, width: 25, marginLeft: 10 },
   containerWeatherInfo: {
     flexDirection: "row",
     justifyContent: "space-evenly",

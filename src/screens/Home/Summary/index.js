@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
 import IconWeather from "../../../components/IconWeather";
+import Flag from "react-native-flags";
 
 import styles from "./styles";
 
@@ -12,12 +13,7 @@ const Summary = ({ weatherInfoCurrent, weatherInfoDay }) => {
           <Text style={styles.cityName}>
             {weatherInfoCurrent.name} - {weatherInfoCurrent.sys.country}
           </Text>
-          <Image
-            style={styles.imgFlag}
-            source={{
-              uri: `http://openweathermap.org/images/flags/${weatherInfoCurrent.sys.country.toLowerCase()}.png`,
-            }}
-          />
+          <Flag size={32} code={weatherInfoCurrent.sys.country} />
         </View>
         <View style={styles.containerWeatherInfo}>
           <View style={styles.leftInfo}>
