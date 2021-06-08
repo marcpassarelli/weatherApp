@@ -1,11 +1,11 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Text, View } from "react-native";
 
 import { format, fromUnixTime } from "date-fns";
 
 import styles from "./styles";
 import RainPrecipitation from "../../../components/RainPrecipitation";
+import IconWeather from "../../../components/IconWeather";
 
 const SevenDaysForecast = ({ weatherInfo }) => {
   return (
@@ -21,19 +21,18 @@ const SevenDaysForecast = ({ weatherInfo }) => {
               </Text>
             </View>
             <View style={styles.containerIcon}>
-              <Image
-                style={{ height: 60, width: 60 }}
-                source={{
-                  uri: `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`,
-                }}
-              />
+              <IconWeather icon={day.weather[0].icon} />
             </View>
             <View style={styles.containerTemperature}>
               <Text style={styles.textTemperature}>
                 {Math.round(day.temp.max)}º / {Math.round(day.temp.min)}º
               </Text>
             </View>
-            <RainPrecipitation percentage={(day.pop * 100).toFixed(0) + "%"} />
+            <View style={{ width: "25%" }}>
+              <RainPrecipitation
+                percentage={(day.pop * 100).toFixed(0) + "%"}
+              />
+            </View>
           </View>
         );
       })}

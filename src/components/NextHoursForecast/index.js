@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 import styles from "./styles";
 import RainPrecipitation from "../RainPrecipitation";
+import IconWeather from "../IconWeather";
 
 const NextHoursForecast = ({ weatherInfo, timezoneOffset }) => {
   return (
@@ -25,12 +26,7 @@ const NextHoursForecast = ({ weatherInfo, timezoneOffset }) => {
               <Text style={styles.textHour}>
                 {format(new Date(timeInTimeZone), "hh:mm aaa")}
               </Text>
-              <Image
-                style={{ height: 60, width: 60 }}
-                source={{
-                  uri: `http://openweathermap.org/img/wn/${hour.weather[0].icon}.png`,
-                }}
-              />
+              <IconWeather icon={hour.weather[0].icon} />
               <Text style={styles.textTemperature}>
                 {Math.round(hour.temp)}º
               </Text>

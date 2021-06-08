@@ -1,7 +1,8 @@
-import React from 'react'
-import { Image, Text, View } from 'react-native'
+import React from "react";
+import { Image, Text, View } from "react-native";
+import IconWeather from "../../../components/IconWeather";
 
-import styles from './styles'
+import styles from "./styles";
 
 const Summary = ({ weatherInfoCurrent, weatherInfoDay }) => {
   return (
@@ -23,16 +24,11 @@ const Summary = ({ weatherInfoCurrent, weatherInfoDay }) => {
             <Text style={styles.textCurrentTemperature}>
               {Math.round(weatherInfoCurrent.main.temp)}º
             </Text>
-            <Image
-              style={styles.imgWeather}
-              source={{
-                uri: `http://openweathermap.org/img/wn/${weatherInfoCurrent.weather[0].icon}.png`,
-              }}
-            />
+            <IconWeather icon={weatherInfoCurrent.weather[0].icon} />
           </View>
           <View style={styles.rightInfo}>
             <Text style={styles.textRightInfo}>
-              {Math.round(weatherInfoDay.temp.max)}º /{' '}
+              {Math.round(weatherInfoDay.temp.max)}º /{" "}
               {Math.round(weatherInfoDay.temp.min)}º
             </Text>
             <Text style={styles.textRightInfo}>
@@ -45,6 +41,6 @@ const Summary = ({ weatherInfoCurrent, weatherInfoDay }) => {
         </View>
       </View>
     </>
-  )
-}
-export default Summary
+  );
+};
+export default Summary;
