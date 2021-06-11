@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { ScrollView, Text, View } from "react-native";
 import { format } from "date-fns";
 
 import styles from "./styles";
