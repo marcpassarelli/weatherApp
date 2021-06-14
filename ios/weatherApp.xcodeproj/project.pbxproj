@@ -19,6 +19,7 @@
 		54D27E02438583C1E106611C /* libPods-weatherApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 423520837D38099E47176E4E /* libPods-weatherApp-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A4A853FEE12C81F28FEE4690 /* libPods-weatherApp-weatherAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0389F0A49DA0F4713F39B0B2 /* libPods-weatherApp-weatherAppTests.a */; };
+		BA2BEEC1267790F1003DFFCB /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA2BEEC0267790F1003DFFCB /* AppCenter-Config.plist */; };
 		BB0D945725955A5100481AD3 /* bridgeGeolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0D945625955A5100481AD3 /* bridgeGeolocation.swift */; };
 		F4C3E9C8D6F515A0EA2B0F2A /* libPods-weatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39080D22B67308E010BECED1 /* libPods-weatherApp.a */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		8AE38AB6BC315DB7A5274CA7 /* Pods-weatherApp-weatherAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherApp-weatherAppTests.debug.xcconfig"; path = "Target Support Files/Pods-weatherApp-weatherAppTests/Pods-weatherApp-weatherAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F88ED65218FCBB86720E767 /* libPods-weatherApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-weatherApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B617031EA1B4A59E8093FA8C /* Pods-weatherApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-weatherApp-tvOS/Pods-weatherApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		BA2BEEC0267790F1003DFFCB /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BB0D945525955A5100481AD3 /* weatherApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "weatherApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB0D945625955A5100481AD3 /* bridgeGeolocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bridgeGeolocation.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -165,6 +167,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BA2BEEC0267790F1003DFFCB /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* weatherApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* weatherAppTests */,
@@ -230,6 +233,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				AC13C1710CEEF3DD775DF770 /* [CP] Copy Pods Resources */,
+				421F080B2B8A8188A20CE23F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +256,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				DCE1E121736BDA855A501830 /* [CP] Copy Pods Resources */,
+				49F99776C84D77732630EF72 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -362,6 +367,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				BA2BEEC1267790F1003DFFCB /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +416,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		421F080B2B8A8188A20CE23F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatherApp-weatherAppTests/Pods-weatherApp-weatherAppTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatherApp-weatherAppTests/Pods-weatherApp-weatherAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		49F99776C84D77732630EF72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weatherApp/Pods-weatherApp-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weatherApp/Pods-weatherApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5B0769C8FB641108D8EB494A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
