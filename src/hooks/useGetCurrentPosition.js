@@ -9,7 +9,7 @@ import {
 
 import Geolocation from "react-native-geolocation-service";
 
-const useGetPosition = () => {
+const useGetCurrentPosition = () => {
   const [currentLocation, setCurrentLocation] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -123,4 +123,4 @@ const useGetPosition = () => {
   return [currentLocation, loading];
 };
 
-export default useGetPosition;
+export default useGetCurrentPosition;
