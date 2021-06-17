@@ -1,30 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 import LocationTextInput from "./LocationTextInput";
 import Summary from "./Summary";
 import NextHoursForecast from "../../components/NextHoursForecast";
 import SevenDaysForecast from "./SevenDaysForecast";
 
+import Crashes from "appcenter-crashes";
+import Analytics from "appcenter-analytics";
+
 import styles from "./styles";
 
-import { API_KEY } from "@env";
+import { API_KEY, API_GOOGLE_KEY } from "@env";
 import SearchList from "./SearchList";
 import useGetWeatherInfo from "../../hooks/useGetWeatherInfo";
 
 const Home = () => {
   const [searchResultList, setSearchResultList] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { loadingWeatherInfo, weatherInfoForecast, weatherInfoSummary } =
     useGetWeatherInfo();
   const { navigate } = useNavigation();
 
   useEffect(() => {
-    if (!loadingWeatherInfo) {
-      setLoading(false);
-    }
-  }, [loadingWeatherInfo]);
+    checkPreviousSession();
+  }, []);
+  // useEffect(() => {
+  //   if (!loadingWeatherInfo) {
+  //     setLoading(false);
+  //   }
+  // }, [loadingWeatherInfo]);
 
   const goToHistory = () => {
     navigate("History");
@@ -33,28 +48,51 @@ const Home = () => {
   const handleOnChangeTextInput = async (text) => {
     if (text.length > 2) {
       await fetch(
-        `https://api.openweathermap.org/data/2.5/find?q=${text.trim()}&type=like&sort=population&cnt=30&units=metric&appid=${API_KEY}`
+        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API_KEY}&q=${text.trim()}`
       )
         .then((response) => response.json())
         .then((result) => {
-          setSearchResultList(result);
+          const locations = result.map((location) => {
+            return {
+              key: location.Key,
+              latitude: location.GeoPosition.Latitude,
+              longitude: location.GeoPosition.Longitude,
+              cityName: location.EnglishName,
+              administrativeArea: location.AdministrativeArea.EnglishName,
+              country: location.Country.EnglishName,
+            };
+          });
+          setSearchResultList(locations);
         });
     } else if (text.length === 0) {
       setSearchResultList();
     }
   };
 
+  const checkPreviousSession = async () => {
+    const didCrash = await Crashes.hasCrashedInLastSession();
+    if (didCrash) {
+      const report = await Crashes.lastSessionCrashReport();
+      alert(
+        "Sorry about the crash, we're working so this don't happeng again."
+      );
+    }
+  };
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
         nestedScrollEnabled={true}
+        keyboardShouldPersistTaps={"handled"}
         contentContainerStyle={styles.container}
       >
         <LocationTextInput handleOnChangeText={handleOnChangeTextInput} />
         {searchResultList && (
           <SearchList
-            onPressCity={(lat, long) => {
-              loadWeatherInfo(lat, long);
+            onPressLocation={(lat, long) => {
+              console.log("lat", lat);
+              console.log("long", long);
+              // loadWeatherInfo(lat, long);
             }}
             searchResultList={searchResultList}
           />
@@ -62,7 +100,7 @@ const Home = () => {
         {!loading ? (
           Object.keys(weatherInfoSummary).length > 0 ? (
             <>
-              <Summary
+              {/* <Summary
                 weatherInfoCurrent={weatherInfoSummary}
                 weatherInfoDay={weatherInfoForecast.daily[0]}
               />
@@ -72,7 +110,7 @@ const Home = () => {
               />
               <SevenDaysForecast
                 weatherInfo={weatherInfoForecast.daily.slice(0, 7)}
-              />
+              /> */}
               <TouchableOpacity
                 onPress={goToHistory}
                 style={styles.buttonHistory}
